@@ -1,0 +1,29 @@
+{
+  "manifest_version": 2,
+  "name": "Facebook Slient Mode",
+  "short_name": "Facebook Slient Mode",
+  "description": "Facebook Slient Mode",
+  "version": "1.0.0",
+  "author": "matico",
+  "permissions": [
+    "webRequest", 
+    "webRequestBlocking",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+        "matches": ["*://*.facebook.com/*"],
+        "js": ["js/contentScript.js"],
+        "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+        "js/background.js"
+    ],
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "data/*.json"
+  ]
+}
