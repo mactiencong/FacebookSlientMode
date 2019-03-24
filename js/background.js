@@ -43,6 +43,7 @@ function disable(){
     isEnable = false
     setDisableIcon()
     chrome.webRequest.onBeforeRequest.removeListener(block)
+    reloadFacebookTab()
 }
 
 function setDisableIcon(){
@@ -56,3 +57,15 @@ chrome.browserAction.onClicked.addListener(function(tab) {
         disable()
     } else enable()
 });
+
+function reloadFacebookTab(){
+    chrome.tabs.query({}, function (tabs) {
+        tabs.forEach(tab => {
+            let url = new URL(tab.url)
+            let domain = url.hostname
+            if(domain==="www.facebook.com"){
+                chrome.tabs.reload(tab.id)
+            }
+        })
+    });
+}

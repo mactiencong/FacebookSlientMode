@@ -8,6 +8,7 @@
   "permissions": [
     "webRequest", 
     "webRequestBlocking",
+    "tabs",
     "<all_urls>"
   ],
   "background": {
