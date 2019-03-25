@@ -1,20 +1,23 @@
 {
   "manifest_version": 2,
   "name": "Facebook Slient Mode",
-  "short_name": "Facebook Slient Mode",
-  "description": "Facebook Slient Mode",
+  "short_name": "Facebook Silent Mode",
+  "description": "Facebook Silent Mode",
   "version": "1.0.0",
   "author": "matico",
   "permissions": [
     "webRequest", 
     "webRequestBlocking",
+    "tabs",
+    "webNavigation",
     "<all_urls>"
   ],
   "content_scripts": [
     {
         "matches": ["*://*.facebook.com/*"],
         "js": ["js/contentScript.js"],
-        "all_frames": true
+        "all_frames": true,
+        "run_at": "document_end"
     }
   ],
   "background": {
@@ -25,5 +28,8 @@
   },
   "web_accessible_resources": [
     "data/*.json"
-  ]
+  ],
+  "browser_action":{
+    "default_icon": "icon/enable.png"
+  }
 }
