@@ -128,7 +128,7 @@ function unmuteTab(tab){
 }
 
 function renameFacebookTabTitle(tab){
-    if(isEnable) chrome.tabs.executeScript(tab.id, {code:"document.title = 'Facebook Slient Mode'"})
+    if(isEnable) chrome.tabs.executeScript(tab.id, {code:"document.title = 'Facebook Silent Mode'"})
 }
 
 function newFacebookTabListener(details) {
