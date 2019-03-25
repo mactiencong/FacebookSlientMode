@@ -29,6 +29,7 @@ function enable(){
         {urls: ["<all_urls>"]},
         ["blocking"]
     );
+    processFacebookTab(renameTabTitle)
 }
 
 function setEnableIcon(){
@@ -43,7 +44,7 @@ function disable(){
     isEnable = false
     setDisableIcon()
     chrome.webRequest.onBeforeRequest.removeListener(block)
-    reloadFacebookTab()
+    processFacebookTab(reload)
 }
 
 function setDisableIcon(){
@@ -58,14 +59,22 @@ chrome.browserAction.onClicked.addListener(function(tab) {
     } else enable()
 });
 
-function reloadFacebookTab(){
+function processFacebookTab(process){
     chrome.tabs.query({}, function (tabs) {
         tabs.forEach(tab => {
             let url = new URL(tab.url)
             let domain = url.hostname
             if(domain==="www.facebook.com"){
-                chrome.tabs.reload(tab.id)
+                process(tab)
             }
         })
     });
+}
+
+function reload(tab){
+    chrome.tabs.reload(tab.id)
+}
+
+function renameTabTitle(tab){
+    chrome.tabs.executeScript(tab.id,{code:"document.title = 'Facebook Slient Mode'"});
 }
