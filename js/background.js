@@ -15,7 +15,7 @@ function isBlockUrl(details){
 }
 
 function sendContentScriptMsg(msg='FBSM_ENABLE'){
-    chrome.tabs.query({url: "https://www.facebook.com/*"}, function (tabs) {
+    chrome.tabs.query({url: "*://*.facebook.com/*"}, function (tabs) {
         tabs.forEach(tab => {
             chrome.tabs.sendMessage(tab.id, {message: msg})
         })
@@ -85,7 +85,7 @@ function reload(tab){
 }
 
 function reloadAllFacebookTab(){
-    chrome.tabs.query({url: "https://www.facebook.com/*"}, function (tabs) {
+    chrome.tabs.query({url: "*://*.facebook.com/*"}, function (tabs) {
         tabs.forEach(tab => {
             reload(tab)
         })
@@ -96,14 +96,14 @@ function isFacebookTab(tab){
     try {
         let url = new URL(tab.url)
         let domain = url.hostname
-        return domain==="www.facebook.com"
+        return domain.includes('facebook.com')
     } catch (error) {
         return false
     }
 }
 
 function setSlientAllFacebookTab(){
-    chrome.tabs.query({url: "https://www.facebook.com/*"}, function (tabs) {
+    chrome.tabs.query({url: "*://*.facebook.com/*"}, function (tabs) {
         tabs.forEach(tab => {
             renameFacebookTabTitle(tab)
             muteTab(tab)
@@ -112,7 +112,7 @@ function setSlientAllFacebookTab(){
 }
 
 function removeSlientAllFacebookTab(){
-    chrome.tabs.query({url: "https://www.facebook.com/*"}, function (tabs) {
+    chrome.tabs.query({url: "*://*.facebook.com/*"}, function (tabs) {
         tabs.forEach(tab => {
             unmuteTab(tab)
         })
