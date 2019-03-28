@@ -3,7 +3,7 @@
   "name": "Facebook Silent Mode",
   "short_name": "Facebook Silent Mode",
   "description": "Facebook Silent Mode",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "matico",
   "permissions": [
     "webRequest", 

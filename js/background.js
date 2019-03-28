@@ -28,7 +28,7 @@ function blockListener(details) {
     }
 }
 
-let isEnable = true
+let isEnable = false
 function enable(){
     isEnable = true
     setEnableIcon()
@@ -43,7 +43,7 @@ function setEnableIcon(){
     })
 }
 
-enable()
+disable()
 
 function disable(){
     isEnable = false
