@@ -31,23 +31,17 @@ function blockListener(details) {
 let isEnable = false
 function enable(){
     isEnable = true
-    setEnableIcon()
+    changeBadge()
     addListeners()
     setSlientAllFacebookTab()
     sendContentScriptMsg('FBSM_ENABLE')
-}
-
-function setEnableIcon(){
-    chrome.browserAction.setIcon({
-        path : "icon/enable.png"
-    })
 }
 
 disable()
 
 function disable(){
     isEnable = false
-    setDisableIcon()
+    changeBadge()
     removeListeners()
     removeSlientAllFacebookTab()
     reloadAllFacebookTab()
@@ -66,12 +60,6 @@ function addListeners(){
         ["blocking"]
     )
     chrome.webNavigation.onCompleted.addListener(newFacebookTabListener, { url: [{hostContains: '.facebook.'}] })
-}
-
-function setDisableIcon(){
-    chrome.browserAction.setIcon({
-        path : "icon/disable.png"
-    })
 }
 
 chrome.browserAction.onClicked.addListener(function(tab) {
@@ -119,6 +107,12 @@ function removeSlientAllFacebookTab(){
     })
 }
 
+function changeBadge(){
+    const badge = isEnable? 'silent': ''
+    chrome.browserAction.setBadgeText({text: badge})
+    chrome.browserAction.setBadgeBackgroundColor({color: '#F00'})
+}
+
 function muteTab(tab){
     chrome.tabs.update(tab.id, {muted: true});
 }
@@ -128,7 +122,7 @@ function unmuteTab(tab){
 }
 
 function renameFacebookTabTitle(tab){
-    if(isEnable) chrome.tabs.executeScript(tab.id, {code:"document.title = 'Facebook Silent Mode'"})
+    if(isEnable) chrome.tabs.executeScript(tab.id, {code:"document.title = 'Silent mode'"})
 }
 
 function newFacebookTabListener(details) {

@@ -3,7 +3,7 @@
   "name": "Facebook Silent Mode",
   "short_name": "Facebook Silent Mode",
   "description": "Facebook Silent Mode",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "matico",
   "permissions": [
     "webRequest", 
@@ -30,6 +30,6 @@
     "data/*.json"
   ],
   "browser_action":{
-    "default_icon": "icon/enable.png"
+    "default_icon": "icon/logo.png"
   }
 }
